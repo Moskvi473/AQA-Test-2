@@ -26,7 +26,7 @@ set "MAVEN_PROJECTBASEDIR=%MAVEN_PROJECTBASEDIR:~0,-1%"
 set WRAPPER_JAR="%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.jar"
 set WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
 
-set JAVA_HOME=C:\Program Files\JetBrains\IntelliJ IDEA 2023.3.6\jbr
+set JAVA_HOME=%JAVA_HOME%
 set PATH=%JAVA_HOME%\bin;%PATH%
 
 java -cp %WRAPPER_JAR% "%WRAPPER_LAUNCHER%" %*
