@@ -9,13 +9,13 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    @FindBy(id = "user-name")
+    @FindBy(xpath = "//input[@placeholder='Username' or @name='user-name' or contains(@id, 'user')]")
     private WebElement usernameInput;
 
-    @FindBy(id = "password")
+    @FindBy(xpath = "//input[@placeholder='Password' or @name='password' or contains(@id, 'password')]")
     private WebElement passwordInput;
 
-    @FindBy(id = "login-button")
+    @FindBy(xpath = "//button[contains(text(), 'Login') or @id='login-button' or contains(@class, 'login-button')]")
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
