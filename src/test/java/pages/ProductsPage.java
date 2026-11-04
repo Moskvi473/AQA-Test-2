@@ -1,27 +1,24 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class ProductsPage {
 
     private WebDriver driver;
 
-    @FindBy(className = "title")
-    private WebElement pageTitle;
+    private static final By PAGE_TITLE = By.xpath("//div[@class='title']");
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     public String getPageTitle() {
-        return pageTitle.getText();
+        return driver.findElement(PAGE_TITLE).getText();
     }
 
     public boolean isPageVisible() {
-        return pageTitle.isDisplayed();
+        return driver.findElement(PAGE_TITLE).isDisplayed();
     }
 }

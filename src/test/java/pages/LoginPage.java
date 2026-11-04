@@ -1,26 +1,25 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
     private WebDriver driver;
 
-    @FindBy(xpath = "//input[@placeholder='Username' or @name='user-name' or contains(@id, 'user')]")
-    private WebElement usernameInput;
-
-    @FindBy(xpath = "//input[@placeholder='Password' or @name='password' or contains(@id, 'password')]")
-    private WebElement passwordInput;
-
-    @FindBy(xpath = "//button[contains(text(), 'Login') or @id='login-button' or contains(@class, 'login-button')]")
-    private WebElement loginButton;
+    private static final By USERNAME_INPUT = By.xpath(
+        "//input[@placeholder='Username' or @name='user-name' or contains(@id, 'user')]"
+    );
+    private static final By PASSWORD_INPUT = By.xpath(
+        "//input[@placeholder='Password' or @name='password' or contains(@id, 'password')]"
+    );
+    private static final By LOGIN_BUTTON = By.xpath(
+        "//button[contains(text(), 'Login') or @id='login-button' or contains(@class, 'login-button')]"
+    );
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver, this);
     }
 
     public void open(String url) {
@@ -28,14 +27,16 @@ public class LoginPage {
     }
 
     public void setUsername(String username) {
-        usernameInput.sendKeys(username);
+        driver.findElement(USERNAME_INPUT).clear();
+        driver.findElement(USERNAME_INPUT).sendKeys(username);
     }
 
     public void setPassword(String password) {
-        passwordInput.sendKeys(password);
+        driver.findElement(PASSWORD_INPUT).clear();
+        driver.findElement(PASSWORD_INPUT).sendKeys(password);
     }
 
     public void clickLogin() {
-        loginButton.click();
+        driver.findElement(LOGIN_BUTTON).click();
     }
 }

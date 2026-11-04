@@ -15,13 +15,31 @@
         <selenium.version>4.27.0</selenium.version>
         <junit.version>5.11.4</junit.version>
         <cucumber.version>7.20.1</cucumber.version>
+        <testit.adapter.version>1.6.0</testit.adapter.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Force messages version to resolve conflict between cucumber 7.20.1 and testit-adapter-cucumber7 -->
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>messages</artifactId>
+                <version>24.1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
             <version>${selenium.version}</version>
         </dependency>
 
@@ -52,6 +70,20 @@
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-api</artifactId>
             <version>1.11.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- TestIT Adapter for Cucumber 7 -->
+        <dependency>
+            <groupId>ru.testit</groupId>
+            <artifactId>testit-java-commons</artifactId>
+            <version>${testit.adapter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ru.testit</groupId>
+            <artifactId>testit-adapter-cucumber7</artifactId>
+            <version>${testit.adapter.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

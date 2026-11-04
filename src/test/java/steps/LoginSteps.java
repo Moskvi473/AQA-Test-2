@@ -3,9 +3,10 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
 import pages.LoginPage;
 import pages.ProductsPage;
 
@@ -19,7 +20,7 @@ public class LoginSteps {
     public void openLoginPage(String url) {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        loginPage = PageFactory.initElements(driver, LoginPage.class);
+        loginPage = new LoginPage(driver);
         loginPage.open(url);
     }
 
@@ -40,12 +41,16 @@ public class LoginSteps {
 
     @Then("Я должен увидеть страницу {string}")
     public void verifyProductsPage(String expectedPage) {
-        productsPage = PageFactory.initElements(driver, ProductsPage.class);
+        productsPage = new ProductsPage(driver);
+        String currentUrl = driver.getCurrentUrl();
+        if (!currentUrl.contains("inventory")) {
+            throw new AssertionError("Expected products page but got: " + currentUrl);
+        }
     }
 
     @Then("Я должен увидеть заголовок {string}")
     public void verifyPageTitle(String expectedTitle) {
-        productsPage = PageFactory.initElements(driver, ProductsPage.class);
+        productsPage = new ProductsPage(driver);
         String actualTitle = productsPage.getPageTitle();
         if (!actualTitle.equals(expectedTitle)) {
             throw new AssertionError(
